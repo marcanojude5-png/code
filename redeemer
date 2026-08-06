@@ -1145,7 +1145,7 @@ local function buildGUI()
 
     local asLabel = create("TextLabel", {
         Size = UDim2.new(0, 80, 0, 22),
-        Position = UDim2.new(0, 250, 0, 12),
+        Position = UDim2.new(0, 150, 0, 12),
         BackgroundTransparency = 1,
         Text = "Auto Submit",
         TextColor3 = Color3.fromRGB(150, 180, 220),
@@ -1158,7 +1158,7 @@ local function buildGUI()
 
     local asToggle = create("TextButton", {
         Size = UDim2.new(0, 52, 0, 22),
-        Position = UDim2.new(0, 348, 0, 12),
+        Position = UDim2.new(0, 228, 0, 12),
         BackgroundColor3 = _G.AutoSubmitEnabled and Color3.fromRGB(34, 197, 94) or Color3.fromRGB(239, 68, 68),
         Text = _G.AutoSubmitEnabled and "ON" or "OFF",
         TextColor3 = Color3.fromRGB(255, 255, 255),
@@ -1226,7 +1226,7 @@ local function buildGUI()
     -- ROW 2 (Right Side): Submit After Count
     local saLabel = create("TextLabel", {
         Size = UDim2.new(0, 80, 0, 22),
-        Position = UDim2.new(0, 250, 0, 42),
+        Position = UDim2.new(0, 150, 0, 42),
         BackgroundTransparency = 1,
         Text = "Submit After",
         TextColor3 = Color3.fromRGB(150, 180, 220),
@@ -1239,7 +1239,7 @@ local function buildGUI()
 
     local minusBtn = create("TextButton", {
         Size = UDim2.new(0, 24, 0, 22),
-        Position = UDim2.new(0, 348, 0, 42),
+        Position = UDim2.new(0, 228, 0, 42),
         BackgroundColor3 = Color3.fromRGB(18, 28, 50),
         Text = "−",
         TextColor3 = Color3.fromRGB(200, 220, 255),
@@ -1253,7 +1253,7 @@ local function buildGUI()
 
     local countDisplay = create("TextLabel", {
         Size = UDim2.new(0, 28, 0, 22),
-        Position = UDim2.new(0, 374, 0, 42),
+        Position = UDim2.new(0, 254, 0, 42),
         BackgroundColor3 = Color3.fromRGB(18, 28, 50),
         BackgroundTransparency = 0.3,
         Text = tostring(_G.SubmitAfterCount),
@@ -1268,7 +1268,7 @@ local function buildGUI()
 
     local plusBtn = create("TextButton", {
         Size = UDim2.new(0, 24, 0, 22),
-        Position = UDim2.new(0, 404, 0, 42),
+        Position = UDim2.new(0, 284, 0, 42),
         BackgroundColor3 = Color3.fromRGB(18, 28, 50),
         Text = "+",
         TextColor3 = Color3.fromRGB(200, 220, 255),
