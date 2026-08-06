@@ -1020,7 +1020,7 @@ local function buildGUI()
         Size = UDim2.new(0.4, 0, 1, 0),
         Position = UDim2.new(0, 10, 0, 0),
         BackgroundTransparency = 1,
-        Text = "Noxis Hub",
+        Text = "Kys Hub",
         TextColor3 = Color3.fromRGB(150, 200, 255),
         Font = Enum.Font.GothamBold,
         TextSize = 14,
@@ -1419,4 +1419,4 @@ buildGUI()
 startPlayerGuiScanner()
 startAutoWriteLoop()
 
-print("[Auto Code] Noxis Hub loaded successfully!")
+print("[Auto Code] Kys Hub loaded successfully!")
