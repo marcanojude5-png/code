@@ -792,9 +792,6 @@ local function buildGUI()
 
     local guiParent = getGuiParent()
 
-    -- ============================================================
-    -- SCREEN GUI
-    -- ============================================================
     ScreenGui = create("ScreenGui", {
         Name = "BrainrotRedeemerGui",
         ResetOnSpawn = false,
@@ -804,9 +801,6 @@ local function buildGUI()
         Parent = guiParent,
     })
 
-    -- ============================================================
-    -- MAIN FRAME - WIDER AND SHORTER LAYOUT (430x185)
-    -- ============================================================
     local PANEL_W = 340
     local PANEL_H = 185
 
@@ -818,7 +812,7 @@ local function buildGUI()
             or UDim2.new(0.5, 0, 0.4, 0),
         Size = UDim2.new(0, PANEL_W, 0, PANEL_H),
         BackgroundColor3 = Color3.fromRGB(8, 12, 28),
-        BackgroundTransparency = 0.05,
+        BackgroundTransparency = 1,
         BorderSizePixel = 0,
         ClipsDescendants = true,
         Active = true,
@@ -826,14 +820,32 @@ local function buildGUI()
     })
 
     create("UICorner", { CornerRadius = UDim.new(0, 12), Parent = MainFrame })
-    create("UIGradient", {
-        Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(14, 20, 40)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(6, 10, 24)),
-        }),
-        Rotation = 90,
+
+    -- ===== YOUR DISCORD IMAGE AS BACKGROUND =====
+    local bgImage = create("ImageLabel", {
+        Name = "BackgroundImage",
+        Size = UDim2.new(1, 0, 1, 0),
+        Position = UDim2.new(0, 0, 0, 0),
+        BackgroundTransparency = 1,
+        Image = "https://cdn.discordapp.com/attachments/1534187283706544150/1535019007420399829/ChatGPT_Image_6._Aug._2026_21_59_51.png?ex=6a763d5a&is=6a74ebda&hm=5288bafdb3abe325fdab90e5acc6cb96c1d3561b555d6029558971754959209e",
+        ImageTransparency = 0.15,
+        ScaleType = Enum.ScaleType.Crop,
+        ZIndex = 0,
         Parent = MainFrame,
     })
+    create("UICorner", { CornerRadius = UDim.new(0, 12), Parent = bgImage })
+
+    -- Dark overlay so text stays readable
+    local bgOverlay = create("Frame", {
+        Name = "BackgroundOverlay",
+        Size = UDim2.new(1, 0, 1, 0),
+        BackgroundColor3 = Color3.fromRGB(6, 10, 24),
+        BackgroundTransparency = 0.25,
+        BorderSizePixel = 0,
+        ZIndex = 1,
+        Parent = MainFrame,
+    })
+    create("UICorner", { CornerRadius = UDim.new(0, 12), Parent = bgOverlay })
 
     -- BLUE BORDER
     local mainStroke = create("UIStroke", {
@@ -854,14 +866,12 @@ local function buildGUI()
         Parent = mainStroke,
     })
 
-    -- ============================================================
     -- BLACK HOLE PARTICLES
-    -- ============================================================
     local HoleContainer = create("Frame", {
         Name = "HoleContainer",
         Size = UDim2.new(1, 0, 1, 0),
         BackgroundTransparency = 1,
-        ZIndex = 1,
+        ZIndex = 2,
         Parent = MainFrame,
     })
 
@@ -880,7 +890,6 @@ local function buildGUI()
         frameHeight = PANEL_H
     end
 
-    -- Color variants for the rings
     local ringColors = {
         Color3.fromRGB(80, 120, 255),
         Color3.fromRGB(120, 60, 255),
@@ -894,7 +903,6 @@ local function buildGUI()
         local sz = math.random(8, 22)
         local ringColor = ringColors[math.random(1, #ringColors)]
 
-        -- Outer glow
         local glow = create("Frame", {
             Name = "BH_Glow_" .. i,
             Size = UDim2.new(0, sz + 8, 0, sz + 8),
@@ -902,43 +910,40 @@ local function buildGUI()
             BackgroundColor3 = ringColor,
             BackgroundTransparency = 0.7 + math.random(0, 20) / 100,
             BorderSizePixel = 0,
-            ZIndex = 1,
+            ZIndex = 2,
             Parent = HoleContainer,
         })
         create("UICorner", { CornerRadius = UDim.new(1, 0), Parent = glow })
 
-        -- Ring
         local ring = create("Frame", {
             Name = "BH_Ring_" .. i,
             Size = UDim2.new(0, sz + 2, 0, sz + 2),
             BackgroundColor3 = ringColor,
             BackgroundTransparency = 0.4 + math.random(0, 30) / 100,
             BorderSizePixel = 0,
-            ZIndex = 2,
+            ZIndex = 3,
             Parent = HoleContainer,
         })
         create("UICorner", { CornerRadius = UDim.new(1, 0), Parent = ring })
 
-        -- Dark core
         local core = create("Frame", {
             Name = "BH_Core_" .. i,
             Size = UDim2.new(0, sz - 2, 0, sz - 2),
             BackgroundColor3 = Color3.fromRGB(2, 2, 8),
             BackgroundTransparency = 0.1,
             BorderSizePixel = 0,
-            ZIndex = 3,
+            ZIndex = 4,
             Parent = HoleContainer,
         })
         create("UICorner", { CornerRadius = UDim.new(1, 0), Parent = core })
 
-        -- Tiny bright center dot
         local dot = create("Frame", {
             Name = "BH_Dot_" .. i,
             Size = UDim2.new(0, 2, 0, 2),
             BackgroundColor3 = Color3.fromRGB(200, 220, 255),
             BackgroundTransparency = 0.3 + math.random(0, 40) / 100,
             BorderSizePixel = 0,
-            ZIndex = 4,
+            ZIndex = 5,
             Parent = HoleContainer,
         })
         create("UICorner", { CornerRadius = UDim.new(1, 0), Parent = dot })
@@ -971,18 +976,15 @@ local function buildGUI()
             if newWidth > 0 and newHeight > 0 then
                 for _, hole in ipairs(blackholes) do
                     if hole and hole.glow and hole.glow.Parent then
-                        -- Slow drift
                         hole.y = hole.y + hole.speed
                         hole.wobble = hole.wobble + hole.wobbleSpeed
                         hole.x = hole.x + math.sin(hole.wobble) * hole.drift * 0.3
                         hole.rotation = hole.rotation + hole.rotSpeed
 
-                        -- Pulse the glow
                         local pulse = math.sin(t * 2 + hole.pulseOffset * 6.28) * 0.15
                         hole.glow.BackgroundTransparency = 0.7 + pulse
                         hole.ring.BackgroundTransparency = 0.5 + pulse * 0.5
 
-                        -- Wrap around
                         if hole.y > hole.frameHeight + 40 then
                             hole.y = -30
                             hole.x = math.random(0, hole.frameWidth)
@@ -1002,9 +1004,7 @@ local function buildGUI()
         end
     end)
 
-    -- ============================================================
-    -- TITLE BAR - BLUE ACCENT
-    -- ============================================================
+    -- TITLE BAR
     local titleBar = create("Frame", {
         Size = UDim2.new(1, 0, 0, 28),
         BackgroundColor3 = Color3.fromRGB(10, 16, 32),
@@ -1029,7 +1029,6 @@ local function buildGUI()
         Parent = titleBar,
     })
 
-    -- ===== HELP BUTTON (?) =====
     local helpBtn = create("TextButton", {
         Size = UDim2.new(0, 22, 0, 22),
         Position = UDim2.new(1, -134, 0.5, -11),
@@ -1044,7 +1043,6 @@ local function buildGUI()
     })
     create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = helpBtn })
 
-    -- MINIMIZE BUTTON
     local minimizeBtn = create("TextButton", {
         Name = "MinimizeBtn",
         Size = UDim2.new(0, 22, 0, 22),
@@ -1060,7 +1058,6 @@ local function buildGUI()
     })
     create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = minimizeBtn })
 
-    -- Main toggle (ON/OFF)
     local toggleButton = create("TextButton", {
         Name = "SwitchBtn",
         Size = UDim2.new(0, 52, 0, 22),
@@ -1087,9 +1084,7 @@ local function buildGUI()
         end
     end)
 
-    -- ============================================================
-    -- CONTENT FRAME - SHORTER & WIDER LAYOUT
-    -- ============================================================
+    -- CONTENT FRAME
     local ContentFrame = create("Frame", {
         Name = "ContentFrame",
         Size = UDim2.new(1, 0, 1, -28),
@@ -1099,7 +1094,6 @@ local function buildGUI()
         Parent = MainFrame,
     })
 
-    -- ROW 1 (Left Side): Auto Type + Auto Submit
     local awLabel = create("TextLabel", {
         Size = UDim2.new(0, 80, 0, 22),
         Position = UDim2.new(0, 12, 0, 12),
@@ -1183,7 +1177,6 @@ local function buildGUI()
         end
     end)
 
-    -- ROW 2 (Left Side): Riddle Solver
     local rsLabel = create("TextLabel", {
         Size = UDim2.new(0, 100, 0, 22),
         Position = UDim2.new(0, 12, 0, 42),
@@ -1223,7 +1216,6 @@ local function buildGUI()
         end
     end)
 
-    -- ROW 2 (Right Side): Submit After Count
     local saLabel = create("TextLabel", {
         Size = UDim2.new(0, 80, 0, 22),
         Position = UDim2.new(0, 150, 0, 42),
@@ -1292,7 +1284,6 @@ local function buildGUI()
         end
     end)
 
-    -- Status & Info Section (Right Side - Wider Space)
     local statusLabel = create("TextLabel", {
         Name = "StatusLabel",
         Size = UDim2.new(0, 180, 0, 22),
@@ -1321,7 +1312,6 @@ local function buildGUI()
         Parent = ContentFrame,
     })
 
-    -- Help popup
     local helpFrame = create("Frame", {
         Name = "HelpFrame",
         Size = UDim2.new(1, -24, 0, 60),
@@ -1359,9 +1349,7 @@ local function buildGUI()
         helpFrame.Visible = not helpFrame.Visible
     end)
 
-    -- ============================================================
     -- DRAG FUNCTIONALITY
-    -- ============================================================
     local dragging = false
     local dragStart, startPos
 
@@ -1418,28 +1406,17 @@ local function buildGUI()
                 if _G.ScriptEnabled then
                     if _G.AutoWriteEnabled then
                         statusLabel.Text = "Status: Active — Listening"
-                        statusLabel.TextColor3 = Color3.fromRGB(80, 200, 120)
-                    else
-                        statusLabel.Text = "Status: Enabled — Idle"
-                        statusLabel.TextColor3 = Color3.fromRGB(200, 180, 80)
                     end
-                else
-                    statusLabel.Text = "Status: Disabled"
-                    statusLabel.TextColor3 = Color3.fromRGB(200, 80, 80)
-                end
-
-                if latestCode then
-                    latestLabel.Text = "Latest: " .. tostring(latestCode)
-                else
-                    latestLabel.Text = "Latest: —"
                 end
             end)
-            task.wait(0.5)
+            task.wait(1)
         end
     end)
-    
-    startPlayerGuiScanner()
-    startAutoWriteLoop()
 end
 
+-- ===== INITIALIZE =====
 buildGUI()
+startPlayerGuiScanner()
+startAutoWriteLoop()
+
+print("[Auto Code] Noxis Hub loaded successfully!")
