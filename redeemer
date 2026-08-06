@@ -807,7 +807,7 @@ local function buildGUI()
     -- ============================================================
     -- MAIN FRAME - WIDER AND SHORTER LAYOUT (430x185)
     -- ============================================================
-    local PANEL_W = 430
+    local PANEL_W = 340
     local PANEL_H = 185
 
     MainFrame = create("Frame", {
