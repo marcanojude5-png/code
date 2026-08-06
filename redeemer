@@ -817,8 +817,8 @@ local function buildGUI()
             and UDim2.new(0, config.panelX, 0, config.panelY)
             or UDim2.new(0.5, 0, 0.4, 0),
         Size = UDim2.new(0, PANEL_W, 0, PANEL_H),
-        BackgroundColor3 = Color3.fromRGB(8, 12, 28),
-        BackgroundTransparency = 0.05,
+        BackgroundColor3 = Color3.fromRGB(90, 35, 150),
+        BackgroundTransparency = 0.25,
         BorderSizePixel = 0,
         ClipsDescendants = true,
         Active = true,
@@ -828,8 +828,8 @@ local function buildGUI()
     create("UICorner", { CornerRadius = UDim.new(0, 12), Parent = MainFrame })
     create("UIGradient", {
         Color = ColorSequence.new({
-            ColorSequenceKeypoint.new(0, Color3.fromRGB(14, 20, 40)),
-            ColorSequenceKeypoint.new(1, Color3.fromRGB(6, 10, 24)),
+            ColorSequenceKeypoint.new(0, Color3.fromRGB(140, 70, 220)),
+            ColorSequenceKeypoint.new(1, Color3.fromRGB(70, 20, 120)),
         }),
         Rotation = 90,
         Parent = MainFrame,
@@ -1007,8 +1007,8 @@ local function buildGUI()
     -- ============================================================
     local titleBar = create("Frame", {
         Size = UDim2.new(1, 0, 0, 28),
-        BackgroundColor3 = Color3.fromRGB(10, 16, 32),
-        BackgroundTransparency = 0.5,
+        BackgroundColor3 = Color3.fromRGB(57, 255, 20),
+        BackgroundTransparency = 0.35,
         BorderSizePixel = 0,
         ZIndex = 10,
         Parent = MainFrame,
