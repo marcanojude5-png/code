@@ -805,10 +805,10 @@ local function buildGUI()
     })
 
     -- ============================================================
-    -- MAIN FRAME
+    -- MAIN FRAME - WIDER AND SHORTER LAYOUT (430x185)
     -- ============================================================
-    local PANEL_W = 240
-    local PANEL_H = 310
+    local PANEL_W = 430
+    local PANEL_H = 185
 
     MainFrame = create("Frame", {
         Name = "MainFrame",
@@ -1020,7 +1020,7 @@ local function buildGUI()
         Size = UDim2.new(0.4, 0, 1, 0),
         Position = UDim2.new(0, 10, 0, 0),
         BackgroundTransparency = 1,
-        Text = "NexusHub",
+        Text = "Nexus Hub",
         TextColor3 = Color3.fromRGB(150, 200, 255),
         Font = Enum.Font.GothamBold,
         TextSize = 14,
@@ -1088,7 +1088,7 @@ local function buildGUI()
     end)
 
     -- ============================================================
-    -- CONTENT FRAME
+    -- CONTENT FRAME - SHORTER & WIDER LAYOUT
     -- ============================================================
     local ContentFrame = create("Frame", {
         Name = "ContentFrame",
@@ -1099,10 +1099,10 @@ local function buildGUI()
         Parent = MainFrame,
     })
 
-    -- ROW 1: Auto-Write
+    -- ROW 1 (Left Side): Auto Type + Auto Submit
     local awLabel = create("TextLabel", {
         Size = UDim2.new(0, 80, 0, 22),
-        Position = UDim2.new(0, 12, 0, 8),
+        Position = UDim2.new(0, 12, 0, 12),
         BackgroundTransparency = 1,
         Text = "Auto Type",
         TextColor3 = Color3.fromRGB(150, 180, 220),
@@ -1115,7 +1115,7 @@ local function buildGUI()
 
     local awToggle = create("TextButton", {
         Size = UDim2.new(0, 52, 0, 22),
-        Position = UDim2.new(1, -56, 0, 8),
+        Position = UDim2.new(0, 82, 0, 12),
         BackgroundColor3 = _G.AutoWriteEnabled and Color3.fromRGB(34, 197, 94) or Color3.fromRGB(239, 68, 68),
         Text = _G.AutoWriteEnabled and "ON" or "OFF",
         TextColor3 = Color3.fromRGB(255, 255, 255),
@@ -1143,10 +1143,9 @@ local function buildGUI()
         end
     end)
 
-    -- ROW 2: Auto-Submit + count
     local asLabel = create("TextLabel", {
         Size = UDim2.new(0, 80, 0, 22),
-        Position = UDim2.new(0, 12, 0, 36),
+        Position = UDim2.new(0, 150, 0, 12),
         BackgroundTransparency = 1,
         Text = "Auto Submit",
         TextColor3 = Color3.fromRGB(150, 180, 220),
@@ -1158,8 +1157,8 @@ local function buildGUI()
     })
 
     local asToggle = create("TextButton", {
-        Size = UDim2.new(0, 40, 0, 22),
-        Position = UDim2.new(1, -122, 0, 36),
+        Size = UDim2.new(0, 52, 0, 22),
+        Position = UDim2.new(0, 228, 0, 12),
         BackgroundColor3 = _G.AutoSubmitEnabled and Color3.fromRGB(34, 197, 94) or Color3.fromRGB(239, 68, 68),
         Text = _G.AutoSubmitEnabled and "ON" or "OFF",
         TextColor3 = Color3.fromRGB(255, 255, 255),
@@ -1184,10 +1183,63 @@ local function buildGUI()
         end
     end)
 
-    -- Count controls
+    -- ROW 2 (Left Side): Riddle Solver
+    local rsLabel = create("TextLabel", {
+        Size = UDim2.new(0, 100, 0, 22),
+        Position = UDim2.new(0, 12, 0, 42),
+        BackgroundTransparency = 1,
+        Text = "Riddle Solver",
+        TextColor3 = Color3.fromRGB(150, 180, 220),
+        Font = Enum.Font.GothamSemibold,
+        TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        ZIndex = 10,
+        Parent = ContentFrame,
+    })
+
+    local rsToggle = create("TextButton", {
+        Name = "RiddleSolverToggle",
+        Size = UDim2.new(0, 52, 0, 22),
+        Position = UDim2.new(0, 82, 0, 42),
+        BackgroundColor3 = _G.RiddleSolverEnabled and Color3.fromRGB(34, 197, 94) or Color3.fromRGB(239, 68, 68),
+        Text = _G.RiddleSolverEnabled and "ON" or "OFF",
+        TextColor3 = Color3.fromRGB(255, 255, 255),
+        Font = Enum.Font.GothamBold,
+        TextSize = 10,
+        AutoButtonColor = false,
+        ZIndex = 10,
+        Parent = ContentFrame,
+    })
+    create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = rsToggle })
+
+    rsToggle.MouseButton1Click:Connect(function()
+        _G.RiddleSolverEnabled = not _G.RiddleSolverEnabled
+        if _G.RiddleSolverEnabled then
+            rsToggle.BackgroundColor3 = Color3.fromRGB(34, 197, 94)
+            rsToggle.Text = "ON"
+        else
+            rsToggle.BackgroundColor3 = Color3.fromRGB(239, 68, 68)
+            rsToggle.Text = "OFF"
+        end
+    end)
+
+    -- ROW 2 (Right Side): Submit After Count
+    local saLabel = create("TextLabel", {
+        Size = UDim2.new(0, 80, 0, 22),
+        Position = UDim2.new(0, 150, 0, 42),
+        BackgroundTransparency = 1,
+        Text = "Submit After",
+        TextColor3 = Color3.fromRGB(150, 180, 220),
+        Font = Enum.Font.GothamSemibold,
+        TextSize = 12,
+        TextXAlignment = Enum.TextXAlignment.Left,
+        ZIndex = 10,
+        Parent = ContentFrame,
+    })
+
     local minusBtn = create("TextButton", {
         Size = UDim2.new(0, 24, 0, 22),
-        Position = UDim2.new(1, -78, 0, 36),
+        Position = UDim2.new(0, 228, 0, 42),
         BackgroundColor3 = Color3.fromRGB(18, 28, 50),
         Text = "−",
         TextColor3 = Color3.fromRGB(200, 220, 255),
@@ -1201,7 +1253,7 @@ local function buildGUI()
 
     local countDisplay = create("TextLabel", {
         Size = UDim2.new(0, 28, 0, 22),
-        Position = UDim2.new(1, -52, 0, 36),
+        Position = UDim2.new(0, 254, 0, 42),
         BackgroundColor3 = Color3.fromRGB(18, 28, 50),
         BackgroundTransparency = 0.3,
         Text = tostring(_G.SubmitAfterCount),
@@ -1216,7 +1268,7 @@ local function buildGUI()
 
     local plusBtn = create("TextButton", {
         Size = UDim2.new(0, 24, 0, 22),
-        Position = UDim2.new(1, -24, 0, 36),
+        Position = UDim2.new(0, 284, 0, 42),
         BackgroundColor3 = Color3.fromRGB(18, 28, 50),
         Text = "+",
         TextColor3 = Color3.fromRGB(200, 220, 255),
@@ -1240,71 +1292,30 @@ local function buildGUI()
         end
     end)
 
-    -- ROW 3: Answer Questions (Riddle Solver)
-    local rsLabel = create("TextLabel", {
-        Size = UDim2.new(0, 100, 0, 22),
-        Position = UDim2.new(0, 12, 0, 64),
+    -- Status & Info Section (Right Side - Wider Space)
+    local statusLabel = create("TextLabel", {
+        Name = "StatusLabel",
+        Size = UDim2.new(0, 180, 0, 22),
+        Position = UDim2.new(1, -196, 0, 12),
         BackgroundTransparency = 1,
-        Text = "Riddle Solver",
-        TextColor3 = Color3.fromRGB(150, 180, 220),
-        Font = Enum.Font.GothamSemibold,
+        Text = "Status: Idle",
+        TextColor3 = Color3.fromRGB(100, 140, 200),
+        Font = Enum.Font.GothamMedium,
         TextSize = 12,
         TextXAlignment = Enum.TextXAlignment.Left,
         ZIndex = 10,
         Parent = ContentFrame,
     })
 
-    local rsToggle = create("TextButton", {
-        Name = "RiddleSolverToggle",
-        Size = UDim2.new(0, 52, 0, 22),
-        Position = UDim2.new(1, -56, 0, 64),
-        BackgroundColor3 = _G.RiddleSolverEnabled and Color3.fromRGB(34, 197, 94) or Color3.fromRGB(239, 68, 68),
-        Text = _G.RiddleSolverEnabled and "ON" or "OFF",
-        TextColor3 = Color3.fromRGB(255, 255, 255),
-        Font = Enum.Font.GothamBold,
-        TextSize = 10,
-        AutoButtonColor = false,
-        ZIndex = 10,
-        Parent = ContentFrame,
-    })
-    create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = rsToggle })
-
-    rsToggle.MouseButton1Click:Connect(function()
-        _G.RiddleSolverEnabled = not _G.RiddleSolverEnabled
-        if _G.RiddleSolverEnabled then
-            rsToggle.BackgroundColor3 = Color3.fromRGB(34, 197, 94)
-            rsToggle.Text = "ON"
-        else
-            rsToggle.BackgroundColor3 = Color3.fromRGB(239, 68, 68)
-            rsToggle.Text = "OFF"
-        end
-    end)
-
-    -- Status
-    local statusLabel = create("TextLabel", {
-        Name = "StatusLabel",
-        Size = UDim2.new(1, -24, 0, 20),
-        Position = UDim2.new(0, 12, 0, 92),
-        BackgroundTransparency = 1,
-        Text = "Status: Idle",
-        TextColor3 = Color3.fromRGB(100, 140, 200),
-        Font = Enum.Font.GothamMedium,
-        TextSize = 11,
-        TextXAlignment = Enum.TextXAlignment.Left,
-        ZIndex = 10,
-        Parent = ContentFrame,
-    })
-
-    -- Latest code
     local latestLabel = create("TextLabel", {
         Name = "LatestCodeLabel",
-        Size = UDim2.new(1, -24, 0, 20),
-        Position = UDim2.new(0, 12, 0, 112),
+        Size = UDim2.new(0, 180, 0, 22),
+        Position = UDim2.new(1, -196, 0, 42),
         BackgroundTransparency = 1,
         Text = "Latest: —",
         TextColor3 = Color3.fromRGB(80, 120, 180),
         Font = Enum.Font.GothamMedium,
-        TextSize = 11,
+        TextSize = 12,
         TextXAlignment = Enum.TextXAlignment.Left,
         ZIndex = 10,
         Parent = ContentFrame,
@@ -1313,8 +1324,8 @@ local function buildGUI()
     -- Help popup
     local helpFrame = create("Frame", {
         Name = "HelpFrame",
-        Size = UDim2.new(1, -16, 0, 100),
-        Position = UDim2.new(0, 8, 0, 140),
+        Size = UDim2.new(1, -24, 0, 60),
+        Position = UDim2.new(0, 12, 0, 75),
         BackgroundColor3 = Color3.fromRGB(10, 15, 28),
         BorderSizePixel = 0,
         Visible = false,
@@ -1418,26 +1429,17 @@ local function buildGUI()
                 end
 
                 if latestCode then
-                    latestLabel.Text = "Latest: " .. string.upper(latestCode)
-                    latestLabel.TextColor3 = Color3.fromRGB(120, 170, 255)
+                    latestLabel.Text = "Latest: " .. tostring(latestCode)
+                else
+                    latestLabel.Text = "Latest: —"
                 end
             end)
             task.wait(0.5)
         end
     end)
-end
-
--- ============================================================
--- LAUNCH
--- ============================================================
-local ok, err = pcall(function()
-    buildGUI()
+    
     startPlayerGuiScanner()
     startAutoWriteLoop()
-    logStatus("Ready — Waiting for codes")
-    print("[NexusHub] Loaded.")
-end)
-
-if not ok then
-    warn("[NexusHub] Error: " .. tostring(err))
 end
+
+buildGUI()
