@@ -1310,7 +1310,7 @@ local function buildGUI()
     local latestLabel = create("TextLabel", {
         Name = "LatestCodeLabel",
         Size = UDim2.new(0, 180, 0, 22),
-        Position = UDim2.new(1, -196, 0, 42),
+        Position = UDim2.new(0, 12, 1, -50),
         BackgroundTransparency = 1,
         Text = "Latest: —",
         TextColor3 = Color3.fromRGB(80, 120, 180),
