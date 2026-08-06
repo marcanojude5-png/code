@@ -980,7 +980,7 @@ local function buildGUI()
                         -- Pulse the glow
                         local pulse = math.sin(t * 2 + hole.pulseOffset * 6.28) * 0.15
                         hole.glow.BackgroundTransparency = 0.7 + pulse
-                        hole.ring.BackgroundTransparency = 0.5 + pulse * 0.5
+                        hole.ring.BackgroundTransparency = 0.28 + pulse * 0.5
 
                         -- Wrap around
                         if hole.y > hole.frameHeight + 40 then
@@ -1021,7 +1021,7 @@ local function buildGUI()
         Position = UDim2.new(0, 10, 0, 0),
         BackgroundTransparency = 1,
         Text = "Nexus Hub",
-        TextColor3 = Color3.fromRGB(150, 200, 255),
+        TextColor3 = Color3.fromRGB(120, 255, 120),
         Font = Enum.Font.GothamBold,
         TextSize = 14,
         TextXAlignment = Enum.TextXAlignment.Left,
