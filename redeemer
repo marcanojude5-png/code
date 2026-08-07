@@ -1419,4 +1419,4 @@ buildGUI()
 startPlayerGuiScanner()
 startAutoWriteLoop()
 
-print("[Auto Code] Kys Hub loaded successfully!")
+print("[Auto Code] Noxis Hub loaded successfully!")
