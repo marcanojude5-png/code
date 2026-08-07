@@ -1029,7 +1029,8 @@ local function buildGUI()
         Parent = titleBar,
     })
 
-    local helpBtn = create("TextButton", {
+    -- removed helpBtn
+--[[local helpBtn = create("TextButton", {
         Size = UDim2.new(0, 22, 0, 22),
         Position = UDim2.new(1, -134, 0.5, -11),
         BackgroundColor3 = Color3.fromRGB(18, 28, 50),
@@ -1041,9 +1042,10 @@ local function buildGUI()
         ZIndex = 10,
         Parent = titleBar,
     })
-    create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = helpBtn })
+    create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = helpBtn })]]
 
-    local minimizeBtn = create("TextButton", {
+    -- removed minimizeBtn
+--[[local minimizeBtn = create("TextButton", {
         Name = "MinimizeBtn",
         Size = UDim2.new(0, 22, 0, 22),
         Position = UDim2.new(1, -110, 0.5, -11),
@@ -1056,7 +1058,7 @@ local function buildGUI()
         ZIndex = 10,
         Parent = titleBar,
     })
-    create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = minimizeBtn })
+    create("UICorner", { CornerRadius = UDim.new(0, 4), Parent = minimizeBtn })]]
 
     local toggleButton = create("TextButton", {
         Name = "SwitchBtn",
